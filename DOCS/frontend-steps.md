@@ -53,15 +53,15 @@ Assumes you already created a Vite + React + TypeScript project. Check items off
 - [x] Check utilities work: `bg-bg`, `text-fg`, `text-muted`, `border-line`, `text-display`, `bg-accent`, `text-accent-on`.
 
 ## Phase 2: Data and hooks
-- [ ] `data/site.ts`: name, first, last, eyebrow, intro, email, github, linkedin, portrait path.
-- [ ] `data/nav.ts`: About, Skills, Projects, Experience, Achievements, Contact (`href: "#about"` and so on).
-- [ ] `lib/gsap.ts`: register `ScrollTrigger` and `useGSAP` once, re-export `gsap`.
-- [ ] `hooks/useTheme.ts`: reads `data-theme`, writes it and `localStorage` on change, returns `{ theme, toggle }`.
-- [ ] `hooks/useScrollDirection.ts`: returns `hidden` when scrolling down past about 160px.
-- [ ] `hooks/useActiveSection.ts`: `IntersectionObserver` with `rootMargin: "-45% 0px -50% 0px"`, returns the active section id.
+- [x] `data/site.ts`: name, first, last, eyebrow, intro, email, github, linkedin, portrait path.
+- [x] `data/nav.ts`: About, Skills, Projects, Experience, Achievements, Contact (`href: "#about"` and so on).
+- [x] `lib/gsap.ts`: register `ScrollTrigger` and `useGSAP` once, re-export `gsap`.
+- [x] `hooks/useTheme.ts`: reads `data-theme`, writes it and `localStorage` on change, returns `{ theme, toggle }`.
+- [x] `hooks/useScrollDirection.ts`: returns `hidden` when scrolling down past about 160px.
+- [x] `hooks/useActiveSection.ts`: `IntersectionObserver` with `rootMargin: "-45% 0px -50% 0px"`, returns the active section id.
 
 ## Phase 3: Smooth scroll provider
-- [ ] `providers/SmoothScroll.tsx`: create Lenis once, drive it from the GSAP ticker, keep ScrollTrigger in sync, clean up on unmount, skip when reduced motion:
+- [x] `providers/SmoothScroll.tsx`: create Lenis once, drive it from the GSAP ticker, keep ScrollTrigger in sync, clean up on unmount, skip when reduced motion:
   ```tsx
   const lenis = new Lenis({ autoRaf: false, lerp: 0.1 });
   const update = (time: number) => lenis.raf(time * 1000);
@@ -70,10 +70,10 @@ Assumes you already created a Vite + React + TypeScript project. Check items off
   gsap.ticker.lagSmoothing(0);
   // cleanup: gsap.ticker.remove(update); lenis.destroy();
   ```
-- [ ] Expose the instance through context and a `useScrollTo()` hook (Lenis `scrollTo`, with a native fallback when Lenis is off).
-- [ ] `components/ui/SmoothLink.tsx`: an `<a>` that, for `#hash` hrefs, prevents default and calls `useScrollTo()`. It is reused by the nav, hero and scroll cue.
-- [ ] Wrap the app in `<SmoothScroll>` (in `App.tsx`).
-- [ ] Test: scrolling is smooth and there are no jumps on resize.
+- [x] Expose the instance through context and a `useScrollTo()` hook (Lenis `scrollTo`, with a native fallback when Lenis is off).
+- [x] `components/ui/SmoothLink.tsx`: an `<a>` that, for `#hash` hrefs, prevents default and calls `useScrollTo()`. It is reused by the nav, hero and scroll cue.
+- [x] Wrap the app in `<SmoothScroll>` (in `App.tsx`).
+- [x] Test: scrolling is smooth and there are no jumps on resize.
 
 ## Phase 4: Nav (React Bits PillNav)
 - [ ] Copy the PillNav source and CSS from React Bits into `components/ui/PillNav.jsx` and `components/ui/PillNav.css`.

@@ -1,5 +1,7 @@
+import { SmoothScroll } from './providers/SmoothScroll'
+
 function App() {
-  return null
+  return <SmoothScroll>{null}</SmoothScroll>
 }
 
 export default App
