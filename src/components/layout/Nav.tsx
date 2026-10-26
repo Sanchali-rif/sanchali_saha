@@ -25,18 +25,27 @@ export function Nav() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
         <span className="hidden size-11 shrink-0 md:block" aria-hidden="true" />
         <PillNav
-          logo={<span>S</span>}
+          logo={<span aria-hidden="true">S</span>}
           logoHref="#top"
           logoAlt="Sanchali Saha, back to top"
           items={navItems}
-          activeHref={active && active !== 'top' ? `#${active}` : ''}
+          activeHref={active ? `#${active}` : '#top'}
           linkComponent={SmoothLink}
           theme={theme}
+          itemStyle="plain"
+          hoverEffect="fill"
           indicator="pill"
-          stretch={0.25}
+          layout="split"
+          surface="none"
+          size="md"
+          bounce={0.3}
+          stretch={0.32}
+          collapse="auto"
+          intro
           highlightColor="#C8FF00"
           onMenuToggle={setMenuOpen}
           ariaLabel="Primary"
+          className="navbar-plain"
         />
         <ThemeToggle theme={theme} onToggle={toggle} />
       </div>

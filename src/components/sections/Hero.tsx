@@ -74,7 +74,6 @@ export function Hero() {
         </h1>
 
         <div ref={contentRef} className="mt-10 flex max-w-xl flex-col items-center gap-7 md:mt-12">
-          <p className="text-base leading-relaxed text-muted md:text-lg">{site.intro}</p>
           <div className="flex flex-wrap justify-center gap-3">
             <SmoothLink
               href="#projects"

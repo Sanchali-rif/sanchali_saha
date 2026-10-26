@@ -17,7 +17,15 @@ type PillNavProps = {
   onItemClick?: (item: PillNavItem, index: number, event: React.MouseEvent) => void
   linkComponent?: ComponentType<Record<string, unknown>> | 'a'
   theme?: 'dark' | 'light'
+  layout?: 'split' | 'joined'
+  size?: 'sm' | 'md' | 'lg'
+  surface?: 'glass' | 'solid' | 'none'
+  itemStyle?: 'pill' | 'plain'
+  hoverEffect?: 'fill' | 'glide' | 'none'
   indicator?: 'dot' | 'pill'
+  bounce?: number
+  intro?: boolean
+  collapse?: 'auto' | 'always' | 'never'
   stretch?: number
   highlightColor?: string
   onMenuToggle?: (open: boolean) => void

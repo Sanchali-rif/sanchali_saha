@@ -188,6 +188,113 @@
   outline-offset: 3px;
 }
 
+/* The portfolio uses the React Bits split layout without a logo bubble. */
+.navbar-plain {
+  gap: 0.35rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.navbar-plain .pill-nav__logo {
+  display: none;
+}
+
+.navbar-plain .pill-nav__list {
+  gap: 0.25rem;
+}
+
+.navbar-plain .pill-nav__item {
+  min-height: 2.75rem;
+  padding-inline: 1rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0;
+}
+
+.navbar-plain .pill-nav__item::before {
+  background: var(--accent);
+  transform: scale(0.9);
+}
+
+.navbar-plain .pill-nav__item:hover::before,
+.navbar-plain .pill-nav__item[aria-current='page']::before {
+  transform: scale(1);
+}
+
+.navbar-plain .pill-nav__item:hover,
+.navbar-plain .pill-nav__item[aria-current='page'] {
+  color: var(--accent-on);
+}
+
+.navbar-plain .pill-nav__item[aria-current='page']::after {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .navbar-plain .pill-nav__item {
+    padding-inline: 0.7rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar-plain {
+    position: relative;
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .navbar-plain .pill-nav__logo {
+    display: grid;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    background: transparent;
+    color: var(--fg);
+    font-size: 1.3rem;
+  }
+
+  .navbar-plain .pill-nav__toggle {
+    width: 2.25rem;
+    height: 2.25rem;
+    margin-left: 0;
+    background: var(--accent);
+    color: var(--accent-on);
+  }
+
+  .navbar-plain .pill-nav__panel {
+    top: 3rem;
+    right: 0;
+    left: 0;
+    width: min(100vw - 2rem, 22rem);
+    padding: 0.5rem;
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: var(--surface);
+    box-shadow: 0 24px 50px -28px rgb(0 0 0 / 0.8);
+  }
+
+  .navbar-plain .pill-nav__menu {
+    gap: 0.2rem;
+  }
+
+  .navbar-plain .pill-nav__row {
+    min-height: 2.7rem;
+    padding-inline: 1rem;
+    border-radius: 1rem;
+    color: var(--fg);
+  }
+
+  .navbar-plain .pill-nav__row[aria-current='page'] {
+    background: var(--accent);
+    color: var(--accent-on);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pill-nav__item,
   .pill-nav__item::before,
