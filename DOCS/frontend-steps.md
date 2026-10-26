@@ -76,10 +76,10 @@ Assumes you already created a Vite + React + TypeScript project. Check items off
 - [x] Test: scrolling is smooth and there are no jumps on resize.
 
 ## Phase 4: Nav (React Bits PillNav)
-- [ ] Copy the PillNav source and CSS from React Bits into `components/ui/PillNav.jsx` and `components/ui/PillNav.css`.
-- [ ] Because the project is TypeScript, add `components/ui/PillNav.d.ts` that declares the props (all optional except what you pass) and `export default PillNav`.
-- [ ] `components/ui/ThemeToggle.tsx`: round 44px button (sun/moon icon swap with Framer Motion), `aria-label` says which theme it switches to.
-- [ ] `components/layout/Nav.tsx`: fixed header, PillNav centred in a flex container, theme toggle on the right, an invisible spacer on the left (desktop) so the pill stays centred.
+- [x] Copy the PillNav source and CSS from React Bits into `components/ui/PillNav.jsx` and `components/ui/PillNav.css`.
+- [x] Because the project is TypeScript, add `components/ui/PillNav.d.ts` that declares the props (all optional except what you pass) and `export default PillNav`.
+- [x] `components/ui/ThemeToggle.tsx`: round 44px button (sun/moon icon swap with Framer Motion), `aria-label` says which theme it switches to.
+- [x] `components/layout/Nav.tsx`: fixed header, PillNav centred in a flex container, theme toggle on the right, an invisible spacer on the left (desktop) so the pill stays centred.
 - [ ] Wire the PillNav props:
   ```tsx
   <PillNav
@@ -91,9 +91,9 @@ Assumes you already created a Vite + React + TypeScript project. Check items off
     onMenuToggle={setMenuOpen} ariaLabel="Primary"
   />
   ```
-- [ ] Hide on scroll down, show on scroll up with Framer Motion (`animate={{ y: hidden && !menuOpen ? -110 : 0 }}`).
-- [ ] Test the folded menu: narrow the window, open it, press Esc, click a link.
-- [ ] Add your extra nav ideas here: ______
+- [x] Hide on scroll down, show on scroll up with Framer Motion (`animate={{ y: hidden && !menuOpen ? -110 : 0 }}`).
+- [x] Test the folded menu: narrow the window, open it, press Esc, click a link.
+- [x] Add your extra nav ideas here: theme toggle and keyboard-safe menu dismissal.
 
 ## Phase 5: Hero
 - [ ] Section `id="top"`, `min-h-svh`, centred content.

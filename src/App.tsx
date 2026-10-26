@@ -1,7 +1,12 @@
 import { SmoothScroll } from './providers/SmoothScroll'
+import { Nav } from './components/layout/Nav'
 
 function App() {
-  return <SmoothScroll>{null}</SmoothScroll>
+  return (
+    <SmoothScroll>
+      <Nav />
+    </SmoothScroll>
+  )
 }
 
 export default App
