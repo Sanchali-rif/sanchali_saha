@@ -22,6 +22,11 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+.hero-title {
+  font-size: clamp(4rem, min(23vh, 14.5vw), 13rem);
+  line-height: 0.82;
+}
+
 ::selection {
   background: var(--accent);
   color: var(--accent-on);
