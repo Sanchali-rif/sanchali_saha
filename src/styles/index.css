@@ -197,7 +197,7 @@ body {
   line-height: 1;
   color: transparent;
   opacity: 0.9;
-  -webkit-text-stroke: 1px var(--hero-outline);
+  -webkit-text-stroke: 1.7px var(--hero-outline);
 }
 
 .hero-crosshair {
