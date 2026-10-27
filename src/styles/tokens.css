@@ -8,6 +8,8 @@
   --display: #c8ff00;
   --accent: #c8ff00;
   --accent-on: #111111;
+  --hero-outline: color-mix(in srgb, var(--accent) 35%, transparent);
+  --hero-outline-mobile: color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
 [data-theme="light"] {
@@ -19,6 +21,8 @@
   --display: #315bff;
   --accent: #315bff;
   --accent-on: #ffffffff;
+  --hero-outline: color-mix(in srgb, var(--fg) 24%, transparent);
+  --hero-outline-mobile: color-mix(in srgb, var(--fg) 25%, transparent);
 }
 
 @theme inline {
