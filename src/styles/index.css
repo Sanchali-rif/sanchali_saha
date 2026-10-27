@@ -13,6 +13,26 @@ html {
   background: var(--bg);
 }
 
+.metallic-logo {
+  position: absolute;
+  top: 0.75rem;
+  left: 1rem;
+  z-index: 1;
+  display: block;
+  width: 4.5rem;
+  height: 4.5rem;
+  color: var(--fg);
+}
+
+@media (min-width: 768px) {
+  .metallic-logo {
+    top: 0.5rem;
+    left: 2rem;
+    width: 5.25rem;
+    height: 5.25rem;
+  }
+}
+
 body {
   min-width: 320px;
   margin: 0;

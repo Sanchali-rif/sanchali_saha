@@ -247,7 +247,7 @@
   }
 
   .navbar-plain .pill-nav__logo {
-    display: grid;
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
