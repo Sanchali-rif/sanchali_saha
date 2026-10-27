@@ -36,27 +36,31 @@ export function Footer() {
 
         <div className="mt-20 flex flex-col gap-10 border-t border-accent-on/20 pt-6 text-sm font-medium tracking-[0.04em] sm:mt-28 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-wrap gap-x-6 gap-y-3">
-            <a
+            <motion.a
               href={site.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-opacity hover:opacity-60"
+              className="transition-colors hover:text-black"
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.96 }}
             >
               GitHub
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href={site.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-opacity hover:opacity-60"
+              className="transition-colors hover:text-black"
+              whileHover={{ y: -3 }}
+              whileTap={{ scale: 0.96 }}
             >
               LinkedIn
-            </a>
+            </motion.a>
           </div>
 
           <motion.button
             type="button"
-            className="flex items-center gap-2 self-start uppercase tracking-[0.14em] transition-opacity hover:opacity-60 sm:self-auto"
+            className="flex items-center gap-2 self-start uppercase tracking-[0.14em] transition-colors hover:text-black sm:self-auto"
             onClick={() => scrollTo(0)}
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.96 }}
