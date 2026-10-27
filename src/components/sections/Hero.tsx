@@ -1,10 +1,34 @@
-import { useRef } from 'react'
+import { type ReactElement, useRef } from 'react'
 import { FaRegEnvelope, FaSquareGithub, FaLinkedin } from 'react-icons/fa6'
 import { site } from '../../data/site'
 import { gsap, ScrollTrigger, useGSAP } from '../../lib/gsap'
 import { SmoothLink } from '../ui/SmoothLink'
 
 const nameLines = [site.first.toUpperCase(), site.last.toUpperCase()]
+
+function ActionLabel({ children }: { children: string }) {
+  return <span className="cta__label">{children}</span>
+}
+
+function DownArrowIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 18 18" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 3v11M4.5 9.5 9 14l4.5-4.5" />
+    </svg>
+  )
+}
+
+function DownloadIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 18 18" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 2.5v9m0 0 3.25-3.25M9 11.5 5.75 8.25M3 13.5v2h12v-2" />
+    </svg>
+  )
+}
+
+function IconStack({ icon, className }: { icon: () => ReactElement; className: string }) {
+  return <span className={`cta__icon ${className}`}>{icon()}</span>
+}
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
@@ -172,63 +196,63 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center">
-        <p
-          ref={eyebrowRef}
-          className="mb-[4vh] text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-muted"
-        >
-          {site.eyebrow}
-          <span aria-hidden="true" className="ml-3 hidden w-8 align-middle text-muted sm:inline-block">
-            <span className="block h-px bg-muted/60" />
-          </span>
-        </p>
-
-        <h1
-          id="hero-title"
-          className="hero-title relative z-0 flex max-w-full flex-col items-center font-extrabold uppercase tracking-[-0.045em] text-display"
-        >
-          {nameLines.map((line) => (
-            <span key={line} className="flex whitespace-nowrap">
-              {[...line].map((letter, index) => {
-                const letterIndex = nameLines
-                  .slice(0, nameLines.indexOf(line))
-                  .reduce((total, currentLine) => total + currentLine.length, 0) + index
-
-                return (
-                  <span key={`${line}-${index}`} className="inline-block overflow-hidden">
-                    <span
-                      ref={(element) => { letterRefs.current[letterIndex] = element }}
-                      className="inline-block"
-                    >
-                      {letter}
-                    </span>
-                  </span>
-                )
-              })}
+        <div className="hero-copy">
+          <p
+            ref={eyebrowRef}
+            className="mb-[4vh] text-[0.75rem] font-semibold uppercase tracking-[0.18em] text-muted"
+          >
+            {site.eyebrow}
+            <span aria-hidden="true" className="ml-3 hidden w-8 align-middle text-muted sm:inline-block">
+              <span className="block h-px bg-muted/60" />
             </span>
-          ))}
-        </h1>
+          </p>
 
-        <div ref={contentRef} className="mt-[6vh] flex max-w-xl flex-col items-center gap-[4vh]">
+          <h1
+            id="hero-title"
+            className="hero-title relative z-0 flex w-full max-w-full flex-col items-center font-extrabold uppercase tracking-[-0.045em] text-display"
+          >
+            {nameLines.map((line) => (
+              <span key={line} className="flex whitespace-nowrap">
+                {[...line].map((letter, index) => {
+                  const letterIndex = nameLines
+                    .slice(0, nameLines.indexOf(line))
+                    .reduce((total, currentLine) => total + currentLine.length, 0) + index
+
+                  return (
+                    <span key={`${line}-${index}`} className="inline-block overflow-hidden">
+                      <span
+                        ref={(element) => { letterRefs.current[letterIndex] = element }}
+                        className="inline-block"
+                      >
+                        {letter}
+                      </span>
+                    </span>
+                  )
+                })}
+              </span>
+            ))}
+          </h1>
+        </div>
+
+        <div ref={contentRef} className="mt-[clamp(3rem,6vw,5rem)] flex max-w-xl flex-col items-center gap-6">
           <div className="flex w-full flex-col justify-center gap-3 min-[360px]:flex-row">
             <SmoothLink
               href="#projects"
-              className="h-12 w-full rounded-full bg-accent px-5.5 py-3 text-sm font-medium tracking-[0.04em] text-accent-on transition-transform hover:-translate-y-1 min-[360px]:w-auto"
+              aria-label="View projects"
+              className="cta cta--primary"
             >
-              View projects <span aria-hidden="true">-&gt;</span>
+              <ActionLabel>View projects</ActionLabel>
+              <IconStack icon={DownArrowIcon} className="bg-accent-on text-accent" />
             </SmoothLink>
             <a
               href={site.resume}
               download="SanchaliSaha_CV.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-12 w-full rounded-full border border-line px-5.5 py-3 text-sm font-medium tracking-[0.04em] text-fg transition-colors hover:border-accent hover:text-accent min-[360px]:w-auto"
+              className="cta cta--secondary"
             >
-              <span className="inline-flex items-center gap-2">
-                Download CV
-                <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4" fill="none">
-                  <path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 11.5v2h11v-2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
+              <ActionLabel>Download CV</ActionLabel>
+              <IconStack icon={DownloadIcon} className="border border-fg/60 text-fg" />
             </a>
           </div>
           <div className="flex items-center justify-center gap-3">

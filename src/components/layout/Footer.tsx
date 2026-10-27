@@ -64,6 +64,7 @@ export function Footer() {
             onClick={() => scrollTo(0)}
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.96 }}
+            cursor-pointer
           >
             Back to top <span aria-hidden="true">&#8593;</span>
           </motion.button>
