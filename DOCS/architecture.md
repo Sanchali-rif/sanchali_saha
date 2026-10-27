@@ -77,7 +77,7 @@ portfolio/
 }
 [data-theme="light"] {
   --bg: #f5f1ea;  --surface: #ece7dd;  --fg: #111111;  --muted: #6b6860;
-  --line: #d9d3c7;  --display: #111111;  --accent: #c8ff00;  --accent-on: #111111;
+  --line: #d9d3c7;  --display: #111111;  --accent: #315bff;  --accent-on: #111111;
 }
 @theme inline {
   --color-bg: var(--bg);  --color-fg: var(--fg);  --color-accent: var(--accent);  /* ...and the rest */

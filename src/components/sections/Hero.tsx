@@ -95,7 +95,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub profile"
-              className="grid size-12 place-items-center rounded-full border border-white/20 text-[#ede9e1] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-accent hover:text-accent"
+              className="grid size-12 place-items-center rounded-full border border-fg/20 text-fg transition-all duration-300 ease-out hover:-translate-y-1 hover:border-accent hover:text-accent"
             >
               <FaSquareGithub aria-hidden="true" size={32} />
             </a>
@@ -104,7 +104,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn profile"
-              className="grid size-12 place-items-center rounded-full border border-white/20 text-[#ede9e1] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-accent hover:text-accent"
+              className="grid size-12 place-items-center rounded-full border border-fg/20 text-fg transition-all duration-300 ease-out hover:-translate-y-1 hover:border-accent hover:text-accent"
             >
               <FaLinkedin aria-hidden="true" size={32} />
             </a>
@@ -113,7 +113,7 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Email Sanchali Saha"
-              className="grid size-12 place-items-center rounded-full border border-white/20 text-[#ede9e1] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-accent hover:text-accent"
+              className="grid size-12 place-items-center rounded-full border border-fg/20 text-fg transition-all duration-300 ease-out hover:-translate-y-1 hover:border-accent hover:text-accent"
             >
               <FaRegEnvelope aria-hidden="true" size={32} />
             </a>

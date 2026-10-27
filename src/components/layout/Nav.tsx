@@ -42,7 +42,7 @@ export function Nav() {
           stretch={0.32}
           collapse="auto"
           intro
-          highlightColor="#C8FF00"
+          highlightColor="var(--accent)"
           onMenuToggle={setMenuOpen}
           ariaLabel="Primary"
           className="navbar-plain"

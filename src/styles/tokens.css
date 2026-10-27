@@ -16,9 +16,9 @@
   --fg: #111111;
   --muted: #6b6860;
   --line: #d9d3c7;
-  --display: #111111;
-  --accent: #c8ff00;
-  --accent-on: #111111;
+  --display: #315bff;
+  --accent: #315bff;
+  --accent-on: #ffffffff;
 }
 
 @theme inline {
