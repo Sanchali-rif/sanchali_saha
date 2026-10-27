@@ -6,7 +6,8 @@ export const site = {
   intro:
     'I’m a developer and designer turning ideas into digital experiences.',
   location: 'Kolkata, India',
-  availability: 'Available for work',
+  status: 'Open to internships',
+  resume: '/resume.pdf',
   email: 'sanchalisaha05@gmail.com',
   github: 'https://github.com/Sanchali-rif',
   linkedin: 'https://www.linkedin.com/in/sanchali-saha-6b4aa6328/',

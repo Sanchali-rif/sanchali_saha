@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { FaRegEnvelope, FaSquareGithub, FaLinkedin } from 'react-icons/fa6'
 import { site } from '../../data/site'
-import { gsap, useGSAP } from '../../lib/gsap'
+import { gsap, ScrollTrigger, useGSAP } from '../../lib/gsap'
 import { SmoothLink } from '../ui/SmoothLink'
 
 const nameLines = [site.first.toUpperCase(), site.last.toUpperCase()]
@@ -11,20 +11,21 @@ export function Hero() {
   const eyebrowRef = useRef<HTMLParagraphElement>(null)
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([])
   const contentRef = useRef<HTMLDivElement>(null)
+  const backgroundWordParallaxRef = useRef<HTMLDivElement>(null)
   const backgroundWordRef = useRef<HTMLDivElement>(null)
   const sparkleRef = useRef<SVGSVGElement>(null)
-  const orbitStarRef = useRef<SVGGElement>(null)
   const layersRef = useRef<HTMLDivElement>(null)
 
   useGSAP(
     () => {
       const media = gsap.matchMedia()
+      let active = true
       const letters = letterRefs.current.filter(
         (letter): letter is HTMLSpanElement => letter !== null,
       )
 
       media.add('(prefers-reduced-motion: no-preference)', () => {
-        const intro = gsap.timeline({ defaults: { ease: 'expo.out' } })
+        const intro = gsap.timeline({ defaults: { ease: 'expo.out', overwrite: 'auto' } })
         const layers = layersRef.current ? [layersRef.current] : []
 
         intro
@@ -34,38 +35,45 @@ export function Hero() {
           .from(contentRef.current, { autoAlpha: 0, y: 28, duration: 0.8 }, '-=0.45')
 
         media.add('(min-width: 768px)', () => {
-          gsap.to(backgroundWordRef.current, {
-            x: 40,
+          gsap.fromTo(backgroundWordRef.current, { x: -15 }, {
+            x: 15,
             duration: 6,
             ease: 'sine.inOut',
             repeat: -1,
             yoyo: true,
+            overwrite: 'auto',
           })
-          gsap.to(backgroundWordRef.current, {
-            y: 34,
+          gsap.fromTo(backgroundWordParallaxRef.current, { y: -20 }, {
+            y: 20,
             ease: 'none',
-            scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true },
+            overwrite: 'auto',
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
           })
-          if (orbitStarRef.current) {
-            gsap.timeline({ repeat: -1, defaults: { ease: 'sine.inOut' } })
-              .to(orbitStarRef.current, { x: 78, y: -24, duration: 3 })
-              .to(orbitStarRef.current, { x: 158, y: 4, duration: 3 })
-              .to(orbitStarRef.current, { x: 78, y: 35, duration: 3 })
-              .to(orbitStarRef.current, { x: 0, y: 0, duration: 3 })
-          }
         })
         media.add('(max-width: 767px)', () => {
-          gsap.to(backgroundWordRef.current, {
-            x: 10,
+          gsap.fromTo(backgroundWordRef.current, { x: -15 }, {
+            x: 15,
             duration: 6,
             ease: 'sine.inOut',
             repeat: -1,
             yoyo: true,
+            overwrite: 'auto',
           })
-          gsap.to(backgroundWordRef.current, {
-            y: 12,
+          gsap.fromTo(backgroundWordParallaxRef.current, { y: -20 }, {
+            y: 20,
             ease: 'none',
-            scrollTrigger: { trigger: heroRef.current, start: 'top top', end: 'bottom top', scrub: true },
+            overwrite: 'auto',
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
           })
         })
         gsap.to(sparkleRef.current, {
@@ -76,23 +84,34 @@ export function Hero() {
           ease: 'sine.inOut',
           repeat: -1,
           yoyo: true,
+          overwrite: 'auto',
         })
         const availabilityDot = heroRef.current?.querySelector('.hero-availability-dot')
         if (availabilityDot) {
           gsap.to(availabilityDot, {
             scale: 1.35,
-            autoAlpha: 0.55,
+            autoAlpha: 0.8,
             transformOrigin: 'center',
             duration: 1.8,
             ease: 'sine.inOut',
             repeat: -1,
             yoyo: true,
+            overwrite: 'auto',
           })
         }
 
       })
 
-      return () => media.revert()
+      document.fonts.ready.then(() => {
+        if (active) {
+          ScrollTrigger.refresh()
+        }
+      })
+
+      return () => {
+        active = false
+        media.revert()
+      }
     },
     { scope: heroRef },
   )
@@ -106,22 +125,24 @@ export function Hero() {
     >
       <div ref={layersRef} className="pointer-events-none absolute inset-0 z-0" aria-hidden="true">
         <div
-          ref={backgroundWordRef}
-          className="hero-outline-word absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap font-extrabold uppercase"
+          ref={backgroundWordParallaxRef}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 will-change-transform"
         >
-          Builder
+          <div
+            ref={backgroundWordRef}
+            className="hero-outline-word whitespace-nowrap font-extrabold uppercase will-change-transform"
+          >
+            Builder
+          </div>
         </div>
 
-        <svg ref={sparkleRef} viewBox="0 0 32 32" className="absolute right-5 top-[12vh] size-5 text-fg opacity-35 md:right-[8vw] md:top-[18vh] md:size-9">
+        <svg ref={sparkleRef} viewBox="0 0 32 32" className="absolute right-5 top-[12vh] size-5 text-fg opacity-35 will-change-transform md:right-[8vw] md:top-[18vh] md:size-9">
           <path fill="currentColor" d="M16 0c1.2 9.5 2.5 14.8 16 16-13.5 1.2-14.8 6.5-16 16-1.2-9.5-2.5-14.8-16-16C13.5 14.8 14.8 9.5 16 0Z" />
         </svg>
 
         <div className="hero-orbit absolute bottom-[24%] left-[5%] hidden h-[11vw] w-[22vw] -rotate-[30deg] text-fg/40 md:block">
           <svg viewBox="0 0 320 160" className="h-full w-full">
-            <g ref={orbitStarRef}>
-              <path fill="currentColor" d="M12 0c.8 6 1.7 9.2 10 10-8.3.8-9.2 4-10 10-.8-6-1.7-9.2-10-10 8.3-.8 9.2-4 10-10Z" />
-              <path d="M-14 10h8" stroke="var(--accent)" strokeWidth="1" opacity=".8" />
-            </g>
+            <path d="M-14 10h8" stroke="var(--accent)" strokeWidth="1" opacity=".8" />
           </svg>
         </div>
 
@@ -133,8 +154,8 @@ export function Hero() {
           <div className="text-xs uppercase tracking-[0.18em] text-muted">
             <p>{site.location}</p>
             <p className="mt-3 flex items-center gap-2">
-              <span className="hero-availability-dot size-1.5 rounded-full bg-accent" />
-              {site.availability}
+              <span className="hero-availability-dot size-1.5 rounded-full bg-accent shadow-[0_0_8px_var(--accent)] will-change-transform" />
+              {site.status}
             </p>
           </div>
         </div>
@@ -195,12 +216,20 @@ export function Hero() {
             >
               View projects <span aria-hidden="true">-&gt;</span>
             </SmoothLink>
-            <SmoothLink
-              href="#contact"
+            <a
+              href={site.resume}
+              download="SanchaliSaha_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="h-12 w-full rounded-full border border-line px-5.5 py-3 text-sm font-medium tracking-[0.04em] text-fg transition-colors hover:border-accent hover:text-accent min-[360px]:w-auto"
             >
-              Contact me
-            </SmoothLink>
+              <span className="inline-flex items-center gap-2">
+                Download CV
+                <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4" fill="none">
+                  <path d="M8 1.5v8m0 0 3-3m-3 3-3-3M2.5 11.5v2h11v-2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </a>
           </div>
           <div className="flex items-center justify-center gap-3">
             <a
