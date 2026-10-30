@@ -2,6 +2,7 @@ import { SmoothScroll } from './providers/SmoothScroll'
 import { Nav } from './components/layout/Nav'
 import { Footer } from './components/layout/Footer'
 import { Hero } from './components/sections/Hero'
+import { AboutSection } from './components/sections/AboutSection'
 import { ActivitySection } from './components/sections/ActivitySection'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Nav />
         <main id="main">
           <Hero />
+          <AboutSection />
           <ActivitySection />
         </main>
       <Footer />
