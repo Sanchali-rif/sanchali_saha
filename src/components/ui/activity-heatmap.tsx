@@ -3,7 +3,7 @@
 import { useId, useMemo, useRef, useState } from "react";
 import type { CSSProperties, KeyboardEvent, ReactNode } from "react";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
-import styles from "@/components/ui/activity-heatmap-utils/activity-heatmap.module.css";
+import styles from "./activity-heatmap-utils/activity-heatmap.module.css";
 
 export interface ActivityDay { date: string; count: number }
 export interface ActivityHeatmapProps {
