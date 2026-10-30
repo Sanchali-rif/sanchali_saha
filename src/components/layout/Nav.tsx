@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 import { useActiveSection } from '../../hooks/useActiveSection'
-import { useScrollDirection } from '../../hooks/useScrollDirection'
 import { useTheme } from '../../hooks/useTheme'
 import { navItems } from '../../data/nav'
 import { SmoothLink } from '../ui/SmoothLink'
@@ -13,14 +11,12 @@ const sectionIds = navItems.map((item) => item.href.slice(1))
 
 export function Nav() {
   const { theme, toggle } = useTheme()
-  const hidden = useScrollDirection()
   const active = useActiveSection(sectionIds)
-  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <motion.header
       className="fixed inset-x-0 top-0 z-40 px-4 py-4 md:px-8"
-      animate={{ y: hidden && !menuOpen ? -110 : 0 }}
+      animate={{ y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
       <a href="#top" className="metallic-logo" aria-label="Sanchali Saha, back to top">
@@ -61,7 +57,6 @@ export function Nav() {
           collapse="auto"
           intro
           highlightColor="var(--accent)"
-          onMenuToggle={setMenuOpen}
           ariaLabel="Primary"
           className="navbar-plain"
         />
