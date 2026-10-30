@@ -1,5 +1,40 @@
 import { site } from '../../data/site'
 
+function CardIcon({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="about-card__icon" aria-hidden="true">
+      {children}
+    </span>
+  )
+}
+
+function GraduationCapIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m3 9 9-5 9 5-9 5-9-5Z" />
+      <path d="M7 11.2v4.3c2.7 2 7.3 2 10 0v-4.3M21 10v5" />
+    </svg>
+  )
+}
+
+function LocationIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+      <circle cx="12" cy="10" r="2.5" />
+    </svg>
+  )
+}
+
+function StackIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m12 3 8 4-8 4-8-4 8-4Z" />
+      <path d="m4 12 8 4 8-4M4 17l8 4 8-4" />
+    </svg>
+  )
+}
+
 export function AboutSection() {
   return (
     <section id="about" className="border-t border-line px-6 py-24 sm:px-10 md:min-h-[70vh] md:py-32 lg:px-12">
@@ -40,6 +75,58 @@ export function AboutSection() {
             </li>
           </ul>
         </div>
+      </div>
+
+      <div className="about-cards mx-auto max-w-7xl" aria-label="Quick information">
+        <article className="about-card about-card--education">
+          <div className="about-card__topline">
+            <span className="about-card__label">Education</span>
+            <CardIcon><GraduationCapIcon /></CardIcon>
+          </div>
+          <div className="about-card__content">
+            <h3>B.Tech in IT</h3>
+            <p>RCCIT, Kolkata</p>
+            <span className="about-card__meta">2024 — 2028</span>
+          </div>
+        </article>
+
+        <article className="about-card about-card--location">
+          <div className="about-card__topline">
+            <span className="about-card__label">Location</span>
+            <CardIcon><LocationIcon /></CardIcon>
+          </div>
+          <div className="about-card__content">
+            <h3>Kolkata</h3>
+            <p>West Bengal, India</p>
+          </div>
+          <span className="about-card__coordinates">22.5726° N &nbsp;|&nbsp; 88.3639° E</span>
+        </article>
+
+        <article className="about-card about-card--focus">
+          <div className="about-card__topline">
+            <span className="about-card__label">Current Focus</span>
+            <CardIcon><StackIcon /></CardIcon>
+          </div>
+          <div className="about-card__content">
+            <h3>Web Development</h3>
+            <div className="about-card__tags" aria-label="Technology stack">
+              {['React', 'Node.js', 'Express', 'MongoDB', 'Next.js', 'Python'].map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
+        </article>
+
+        <article className="about-card about-card--availability">
+          <div className="about-card__topline">
+            <span className="about-card__label">Availability</span>
+            <span className="about-card__status" aria-label="Currently available" />
+          </div>
+          <div className="about-card__content">
+            <h3>Open to Internships.</h3>
+            <p>Remote · Freelance Opportunities</p>
+          </div>
+        </article>
       </div>
     </section>
   )
