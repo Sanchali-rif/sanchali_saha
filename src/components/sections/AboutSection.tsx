@@ -1,4 +1,8 @@
+import { useRef } from 'react'
+import { FaArrowRight, FaDownload, FaGraduationCap, FaLayerGroup, FaLocationDot } from 'react-icons/fa6'
 import { site } from '../../data/site'
+import { gsap, useGSAP } from '../../lib/gsap'
+import { SmoothLink } from '../ui/SmoothLink'
 
 function CardIcon({ children }: { children: React.ReactNode }) {
   return (
@@ -8,36 +12,109 @@ function CardIcon({ children }: { children: React.ReactNode }) {
   )
 }
 
-function GraduationCapIcon() {
+function LocationVisual() {
+  const dots = Array.from({ length: 77 }, (_, index) => {
+    const column = index % 11
+    const row = Math.floor(index / 11)
+
+    return <circle key={index} cx={8 + column * 14} cy={7 + row * 14} r="2" />
+  })
+
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="m3 9 9-5 9 5-9 5-9-5Z" />
-      <path d="M7 11.2v4.3c2.7 2 7.3 2 10 0v-4.3M21 10v5" />
-    </svg>
+    <div className="about-card__map" aria-hidden="true">
+      <svg viewBox="0 0 156 91" preserveAspectRatio="xMidYMid meet">
+        {dots}
+      </svg>
+    </div>
   )
 }
 
-function LocationIcon() {
+function EducationProgress() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
-      <circle cx="12" cy="10" r="2.5" />
-    </svg>
-  )
-}
+    <div className="about-card__progress" aria-label={`Year ${site.educationYear} of 4`}>
+      <div className="about-card__progress-bar" aria-hidden="true">
+        {Array.from({ length: 4 }, (_, index) => {
+          const isComplete = index < site.educationYear - 1
+          const isCurrent = index === site.educationYear - 1
 
-function StackIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-      <path d="m12 3 8 4-8 4-8-4 8-4Z" />
-      <path d="m4 12 8 4 8-4M4 17l8 4 8-4" />
-    </svg>
+          return (
+            <span key={index} className={isComplete ? 'is-complete' : isCurrent ? 'is-current' : ''}>
+              {isCurrent && <span />}
+            </span>
+          )
+        })}
+      </div>
+      <span>Year {site.educationYear} of 4</span>
+    </div>
   )
 }
 
 export function AboutSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const entranceRefs = useRef<HTMLElement[]>([])
+  const numberRefs = useRef<(HTMLSpanElement | null)[]>([])
+
+  useGSAP(
+    () => {
+      const media = gsap.matchMedia()
+      const entranceElements = entranceRefs.current
+      const setFinalValues = () => {
+        numberRefs.current.forEach((element, index) => {
+          if (element) element.textContent = String(index === 0 ? site.stats.projects : site.stats.hackathons).padStart(2, '0')
+        })
+      }
+
+      media.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap.fromTo(entranceElements, { y: 24, autoAlpha: 0 }, {
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.8,
+          ease: 'expo.out',
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 78%',
+            once: true,
+          },
+        })
+
+        const counters = [site.stats.projects, site.stats.hackathons]
+        const values = counters.map(() => ({ value: 0 }))
+        gsap.to(values, {
+          value: (index: number) => counters[index],
+          duration: 1.2,
+          ease: 'power3.out',
+          stagger: 0.08,
+          snap: { value: 1 },
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 78%',
+            once: true,
+          },
+          onUpdate: () => {
+            numberRefs.current.forEach((element, index) => {
+              if (element) element.textContent = String(Math.round(values[index].value)).padStart(2, '0')
+            })
+          },
+        })
+      })
+
+      media.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(entranceElements, { y: 0, autoAlpha: 1 })
+        setFinalValues()
+      })
+
+      return () => media.revert()
+    },
+    { scope: sectionRef },
+  )
+
+  const registerEntrance = (element: HTMLElement | null) => {
+    if (element && !entranceRefs.current.includes(element)) entranceRefs.current.push(element)
+  }
+
   return (
-    <section id="about" className="border-t border-line px-6 py-24 sm:px-10 md:min-h-[70vh] md:py-32 lg:px-12">
+    <section ref={sectionRef} id="about" className="border-t border-line px-6 py-24 sm:px-10 md:min-h-[70vh] md:py-32 lg:px-12">
       <div className="mx-auto grid min-h-[28rem] max-w-7xl gap-12 md:min-h-[38rem] md:grid-cols-[1.05fr_0.95fr] md:items-start md:gap-10 lg:gap-16">
         <div>
           <h2 className="text-[clamp(4.5rem,15vw,13rem)] font-extrabold uppercase leading-[0.78] tracking-[-0.075em]" aria-label="About me">
@@ -78,11 +155,12 @@ export function AboutSection() {
       </div>
 
       <div className="about-cards mx-auto max-w-7xl" aria-label="Quick information">
-        <article className="about-card about-card--education">
+        <article ref={registerEntrance} className="about-card about-card--education">
           <div className="about-card__topline">
             <span className="about-card__label">Education</span>
-            <CardIcon><GraduationCapIcon /></CardIcon>
+            <CardIcon><FaGraduationCap /></CardIcon>
           </div>
+          <EducationProgress />
           <div className="about-card__content">
             <h3>B.Tech in IT</h3>
             <p>RCCIT, Kolkata</p>
@@ -90,11 +168,12 @@ export function AboutSection() {
           </div>
         </article>
 
-        <article className="about-card about-card--location">
+        <article ref={registerEntrance} className="about-card about-card--location">
           <div className="about-card__topline">
             <span className="about-card__label">Location</span>
-            <CardIcon><LocationIcon /></CardIcon>
+            <CardIcon><FaLocationDot /></CardIcon>
           </div>
+          <LocationVisual />
           <div className="about-card__content">
             <h3>Kolkata</h3>
             <p>West Bengal, India</p>
@@ -102,22 +181,22 @@ export function AboutSection() {
           <span className="about-card__coordinates">22.5726° N &nbsp;|&nbsp; 88.3639° E</span>
         </article>
 
-        <article className="about-card about-card--focus">
+        <article ref={registerEntrance} className="about-card about-card--focus">
           <div className="about-card__topline">
             <span className="about-card__label">Current Focus</span>
-            <CardIcon><StackIcon /></CardIcon>
+            <CardIcon><FaLayerGroup /></CardIcon>
           </div>
           <div className="about-card__content">
             <h3>Web Development</h3>
             <div className="about-card__tags" aria-label="Technology stack">
-              {['React', 'Node.js', 'Express', 'MongoDB', 'Next.js', 'Python'].map((tag) => (
+              {['React', 'Node.js', 'Express', 'MongoDB', 'TypeScript', 'Python'].map((tag) => (
                 <span key={tag}>{tag}</span>
               ))}
             </div>
           </div>
         </article>
 
-        <article className="about-card about-card--availability">
+        <article ref={registerEntrance} className="about-card about-card--availability">
           <div className="about-card__topline">
             <span className="about-card__label">Availability</span>
             <span className="about-card__status" aria-label="Currently available" />
@@ -126,7 +205,32 @@ export function AboutSection() {
             <h3>Open to Internships.</h3>
             <p>Remote · Freelance Opportunities</p>
           </div>
+          <a
+            href={site.resume}
+            download="Sanchali-Saha-CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="about-card__download"
+          >
+            <span>Download CV</span>
+            <span className="about-card__download-icon"><FaDownload aria-hidden="true" /></span>
+          </a>
         </article>
+      </div>
+
+      <div ref={registerEntrance} className="about-stats mx-auto max-w-7xl" aria-label="Portfolio statistics">
+        <div className="about-stats__item">
+          <span ref={(element) => { numberRefs.current[0] = element }} className="about-stats__number" aria-label={`${site.stats.projects} projects built`}>0</span>
+          <span className="about-stats__label">Projects built</span>
+        </div>
+        <div className="about-stats__item">
+          <span ref={(element) => { numberRefs.current[1] = element }} className="about-stats__number" aria-label={`${site.stats.hackathons} hackathons participated`}>0</span>
+          <span className="about-stats__label">Hackathons participated</span>
+        </div>
+        <SmoothLink href="#projects" className="about-stats__link">
+          <span>See all projects</span>
+          <FaArrowRight aria-hidden="true" />
+        </SmoothLink>
       </div>
     </section>
   )
