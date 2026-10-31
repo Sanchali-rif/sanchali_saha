@@ -53,11 +53,13 @@ export function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const entranceRefs = useRef<HTMLElement[]>([])
   const numberRefs = useRef<(HTMLSpanElement | null)[]>([])
+  const headingLineRefs = useRef<HTMLSpanElement[]>([])
 
   useGSAP(
     () => {
       const media = gsap.matchMedia()
       const entranceElements = entranceRefs.current
+      const headingLines = headingLineRefs.current
       const setFinalValues = () => {
         numberRefs.current.forEach((element, index) => {
           if (element) element.textContent = String(index === 0 ? site.stats.projects : site.stats.hackathons).padStart(2, '0')
@@ -65,6 +67,18 @@ export function AboutSection() {
       }
 
       media.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap.fromTo(headingLines, { yPercent: 110 }, {
+          yPercent: 0,
+          duration: 1,
+          ease: 'expo.out',
+          stagger: 0.12,
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 78%',
+            once: true,
+          },
+        })
+
         gsap.fromTo(entranceElements, { y: 24, autoAlpha: 0 }, {
           y: 0,
           autoAlpha: 1,
@@ -100,6 +114,7 @@ export function AboutSection() {
       })
 
       media.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set(headingLines, { yPercent: 0 })
         gsap.set(entranceElements, { y: 0, autoAlpha: 1 })
         setFinalValues()
       })
@@ -113,15 +128,23 @@ export function AboutSection() {
     if (element && !entranceRefs.current.includes(element)) entranceRefs.current.push(element)
   }
 
+  const registerHeadingLine = (element: HTMLSpanElement | null) => {
+    if (element && !headingLineRefs.current.includes(element)) headingLineRefs.current.push(element)
+  }
+
   return (
-    <section ref={sectionRef} id="about" className="border-t border-line px-6 py-24 sm:px-10 md:min-h-[70vh] md:py-32 lg:px-12">
-      <div className="mx-auto grid min-h-[28rem] max-w-7xl gap-12 md:min-h-[38rem] md:grid-cols-[1.05fr_0.95fr] md:items-start md:gap-10 lg:gap-16">
-        <div>
-          <h2 className="text-[clamp(4.5rem,15vw,13rem)] font-extrabold uppercase leading-[0.78] tracking-[-0.075em]" aria-label="About me">
-            <span className="block">About</span>
-            <span className="block text-accent">Me</span>
+    <section ref={sectionRef} id="about" className="border-t border-line px-6 py-24 sm:px-10 md:min-h-[70vh] md:pt-24 md:pb-32 lg:px-12">
+      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[1.05fr_0.95fr] md:items-start md:gap-10 lg:gap-16">
+        <div className="about-intro md:self-stretch">
+          <h2 className="about-heading" aria-label={`${site.aboutHeading.first} ${site.aboutHeading.second}`}>
+            <span className="about-heading__clip">
+              <span ref={registerHeadingLine} className="about-heading__line">{site.aboutHeading.first}</span>
+            </span>
+            <span className="about-heading__clip">
+              <span ref={registerHeadingLine} className="about-heading__line about-heading__line--accent">{site.aboutHeading.second}</span>
+            </span>
           </h2>
-          <p className="mt-8 max-w-sm text-sm leading-relaxed text-muted sm:text-base">
+          <p className="about-intro__tagline max-w-sm text-sm leading-relaxed text-muted sm:text-base">
             From concept to execution—one build at a time.
           </p>
         </div>

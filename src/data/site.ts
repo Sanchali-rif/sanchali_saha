@@ -5,6 +5,7 @@ export const site = {
   eyebrow: 'Software Developer and Builder',
   intro:
     'I’m a developer and designer turning ideas into digital experiences.',
+  aboutHeading: { first: 'About', second: 'me.' },
   location: 'Kolkata, India',
   status: 'Open to internships',
   resume: '/SanchaliSaha_CV.pdf',
