@@ -158,13 +158,13 @@ export function ProjectsSection() {
               </span>
               <span className="w-[42px]" aria-hidden="true" />
             </div>
-              <div className="project-image-window relative aspect-[16/9] overflow-hidden bg-surface lg:max-h-[78vh]">
+              <div className="project-image-window relative aspect-[1456/696] overflow-hidden bg-surface">
               {!imageFailed ? (
-                <div className="project-parallax-image absolute inset-x-0 top-[-6%] h-[112%]">
+                <div className="project-parallax-image absolute inset-x-0 top-[-6%] h-[112%] w-full">
                   <img
                     src={project.image}
                     alt={project.imageAlt}
-                    className="project-frame__image block h-full w-full object-cover object-top"
+                    className="project-frame__image block h-full w-full max-w-none object-cover object-top"
                     onError={() => setImageFailed(true)}
                   />
                 </div>
