@@ -1,15 +1,48 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import ActivityHeatmap, { type ActivityDay } from '../ui/activity-heatmap'
 import { site } from '../../data/site'
+import { gsap, useGSAP } from '../../lib/gsap'
 
 type ContributionResponse = { contributions?: ActivityDay[] }
 
 const githubUsername = site.github.split('/').filter(Boolean).pop() ?? 'Sanchali-rif'
 
 export function ActivitySection() {
+  const headingRef = useRef<HTMLHeadingElement>(null)
   const [days, setDays] = useState<ActivityDay[]>([])
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
   const [selected, setSelected] = useState<string | null>(null)
+
+  useGSAP(() => {
+    const heading = headingRef.current
+    if (!heading) return
+
+    const media = gsap.matchMedia()
+    let fallback: ReturnType<typeof setTimeout> | undefined
+
+    media.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.set(heading, { opacity: 0, y: 24 })
+      fallback = setTimeout(() => gsap.set(heading, { clearProps: 'all' }), 2000)
+
+      gsap.fromTo(heading,
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: heading, start: 'top 65%', once: true },
+          onComplete: () => clearTimeout(fallback),
+        },
+      )
+
+      return () => {
+        if (fallback) clearTimeout(fallback)
+      }
+    })
+
+    return () => media.revert()
+  }, { scope: headingRef })
 
   useEffect(() => {
     const controller = new AbortController()
@@ -38,7 +71,7 @@ export function ActivitySection() {
         <div className="mb-12 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-muted">Build rhythm</p>
-            <h2 className="text-[clamp(2.5rem,6vw,6rem)] font-light leading-[0.9] tracking-[-0.055em]">Small steps,<br /><span className="text-accent">real momentum.</span></h2>
+            <h2 ref={headingRef} className="text-[clamp(2.5rem,6vw,6rem)] font-light leading-[0.9] tracking-[-0.055em]">Small steps,<br /><span className="text-accent">real momentum.</span></h2>
           </div>
           <a href={site.github} target="_blank" rel="noreferrer" className="text-sm font-semibold text-muted underline decoration-line underline-offset-4 transition-colors hover:text-accent">See the source on GitHub -&gt;</a>
         </div>

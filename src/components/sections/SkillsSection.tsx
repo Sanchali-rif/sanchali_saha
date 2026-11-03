@@ -11,19 +11,28 @@ export function SkillsSection() {
               Skills<span className="text-accent">.</span>
             </h2>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed text-muted sm:text-base">
-            Tools and technologies I use to build, learn, and bring ideas to life.
-          </p>
+          <div className="max-w-sm text-sm leading-relaxed text-muted sm:text-base sm:text-right">
+            <p>Tools and technologies I use to build, learn, and bring ideas to life.</p>
+            <p className="mt-3 flex items-center gap-2 text-xs text-muted sm:justify-end">
+              <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-[var(--core-dot)]" />
+              Core stack
+            </p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 border-t border-line md:grid-cols-2 lg:grid-cols-3">
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <span aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-line" />
           {skillGroups.map((group, index) => (
-            <article key={group.number} className={`py-7 md:py-9 ${index > 0 ? 'border-t border-line' : ''} ${index % 2 === 1 ? 'md:border-l md:pl-8' : ''} ${index % 2 === 0 ? 'md:pr-8' : ''} ${index % 3 !== 0 ? 'lg:border-l lg:pl-8' : 'lg:border-l-0 lg:pl-0'} ${index % 3 === 2 ? 'lg:pr-0' : 'lg:pr-8'}`}>
+            <article key={group.number} className={`relative py-7 md:py-9 ${index % 2 === 1 ? 'md:pl-8' : ''} ${index % 2 === 0 ? 'md:pr-8' : ''} ${index % 3 !== 0 ? 'lg:pl-8' : 'lg:pl-0'} ${index % 3 === 2 ? 'lg:pr-0' : 'lg:pr-8'}`}>
+              {index > 0 && <span aria-hidden="true" className={`absolute inset-x-0 top-0 h-px bg-line ${index % 2 === 1 ? 'md:hidden' : ''} ${index < 3 ? 'lg:hidden' : 'lg:block'}`} />}
+              {(index % 2 === 1 || index % 3 !== 0) && <span aria-hidden="true" className={`absolute inset-y-0 left-0 hidden w-px origin-top bg-line ${index % 2 === 1 ? 'md:block' : ''} ${index % 3 !== 0 ? 'lg:block' : 'lg:hidden'}`} />}
               <h3 className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-muted">{group.number}<span className="mr-2"> </span>{group.title}</h3>
               <ul className="flex flex-wrap gap-2.5">
                 {group.skills.map((skill) => (
-                  <li key={skill} className="rounded-full border border-line px-4 py-2.5 text-sm text-fg transition-colors hover:border-accent hover:text-accent">
-                    {skill}
+                  <li key={skill.name} className={`inline-flex items-center gap-2 rounded-full border border-line py-2.5 pr-4 text-sm text-fg transition-colors hover:border-accent hover:text-accent ${skill.core ? 'pl-[14px]' : 'pl-4'}`}>
+                    {skill.core && <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-[var(--core-dot)]" />}
+                    {skill.core && <span className="sr-only">Core stack: </span>}
+                    {skill.name}
                   </li>
                 ))}
               </ul>

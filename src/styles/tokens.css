@@ -8,6 +8,7 @@
   --display: #c8ff00;
   --accent: #c8ff00;
   --accent-on: #111111;
+  --core-dot: var(--accent);
   --hero-outline: color-mix(in srgb, var(--accent) 35%, transparent);
   --hero-outline-mobile: color-mix(in srgb, var(--accent) 25%, transparent);
 }
@@ -21,6 +22,7 @@
   --display: #315bff;
   --accent: #315bff;
   --accent-on: #ffffffff;
+  --core-dot: var(--fg);
   --hero-outline: color-mix(in srgb, var(--fg) 24%, transparent);
   --hero-outline-mobile: color-mix(in srgb, var(--fg) 25%, transparent);
 }
