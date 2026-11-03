@@ -32,6 +32,22 @@ export function SmoothScroll({ children }: PropsWithChildren) {
   const scrollTo = (target: ScrollTarget) => {
     const lenis = lenisRef.current
 
+    if (target === '#projects') {
+      const section = document.querySelector<HTMLElement>(target)
+      const header = document.querySelector<HTMLElement>('.navbar-header')
+      const top = section
+        ? Math.max(0, section.getBoundingClientRect().top + window.scrollY - (header?.getBoundingClientRect().height ?? 0) - 16)
+        : 0
+
+      if (lenis) {
+        lenis.scrollTo(top)
+        return
+      }
+
+      window.scrollTo({ top, behavior: 'auto' })
+      return
+    }
+
     if (lenis) {
       lenis.scrollTo(target)
       return
