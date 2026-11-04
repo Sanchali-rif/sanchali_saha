@@ -301,8 +301,10 @@
   .navbar-plain .pill-nav__panel {
     top: 3rem;
     right: 0;
-    left: 0;
-    width: min(100vw - 2rem, 22rem);
+    left: auto;
+    box-sizing: border-box;
+    width: min(22rem, calc(100vw - 2rem));
+    max-width: calc(100vw - 2rem);
     padding: 0.5rem;
     border: 1px solid var(--line);
     border-radius: 1.25rem;
@@ -319,6 +321,7 @@
     padding-inline: 1rem;
     border-radius: 1rem;
     color: var(--fg);
+    font-size: 0.875rem;
   }
 
   .navbar-plain .pill-nav__row[aria-current='page'] {
@@ -333,6 +336,10 @@
   .navbar-header--scrolled .navbar-plain {
     width: auto;
     max-width: calc(100vw - 1.5rem);
+  }
+
+  .navbar-header--scrolled .navbar-header__inner {
+    justify-content: flex-end;
   }
 
   .navbar-header--scrolled .navbar-logo {
