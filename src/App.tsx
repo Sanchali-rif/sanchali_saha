@@ -6,6 +6,7 @@ import { AboutSection } from './components/sections/AboutSection'
 import { SkillsSection } from './components/sections/SkillsSection'
 import { ActivitySection } from './components/sections/ActivitySection'
 import { ProjectsSection } from './components/sections/ProjectsSection'
+import { AchievementsSection } from './components/sections/AchievementsSection'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <AboutSection />
           <SkillsSection />
           <ProjectsSection />
+          <AchievementsSection />
           <ActivitySection />
         </main>
       <Footer />

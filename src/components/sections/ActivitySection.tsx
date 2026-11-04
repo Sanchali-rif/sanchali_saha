@@ -66,7 +66,7 @@ export function ActivitySection() {
   }, [])
 
   return (
-    <section id="achievements" className="border-t border-line px-6 py-24 sm:px-10 md:py-32 lg:px-12">
+    <section id="experience" className="border-t border-line px-6 py-24 sm:px-10 md:py-32 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col gap-4 md:mb-16 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
