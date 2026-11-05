@@ -834,18 +834,6 @@ body {
   }
 }
 
-@media (max-height: 639px) {
-  .hero-scroll-cue {
-    display: none;
-  }
-}
-
-@media (min-height: 640px) and (max-height: 699px) {
-  .hero-scroll-cue {
-    display: none;
-  }
-}
-
 ::selection {
   background: var(--accent);
   color: var(--accent-on);

@@ -233,10 +233,10 @@ export function AboutSection() {
             download="Sanchali-Saha-CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="about-card__download"
+            className="cta cta--primary"
           >
-            <span>Download CV</span>
-            <span className="about-card__download-icon"><FaDownload aria-hidden="true" /></span>
+            <span className="cta__label">Download CV</span>
+            <span className="cta__icon bg-accent-on text-accent"><FaDownload aria-hidden="true" /></span>
           </a>
         </article>
       </div>

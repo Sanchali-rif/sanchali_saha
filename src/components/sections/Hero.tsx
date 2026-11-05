@@ -173,7 +173,7 @@ export function Hero() {
         <div className="hero-crosshair hero-crosshair-left absolute left-[25vw] top-[70%] hidden lg:block" />
         <div className="hero-crosshair hero-crosshair-right absolute bottom-[140px] right-[80px] hidden lg:block" />
 
-        <div className="absolute bottom-[10vh] left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-center md:bottom-[7vh] md:left-6 md:translate-x-0 md:flex-row md:items-center md:gap-4 md:text-left lg:left-10">
+        <div className="absolute bottom-[10vh] left-1/2 flex -translate-x-1/2 translate-y-4 flex-col items-center gap-2 text-center md:bottom-[7vh] md:left-6 md:translate-x-0 md:translate-y-0 md:flex-row md:items-center md:gap-4 md:text-left lg:left-10">
           <span className="hidden h-[calc(8rem+30px)] w-px -translate-y-[15px] bg-line md:block" />
           <div className="text-xs uppercase tracking-[0.18em] text-muted">
             <p>{site.location}</p>
@@ -209,7 +209,7 @@ export function Hero() {
 
           <h1
             id="hero-title"
-            className="hero-title relative z-0 flex w-full max-w-full flex-col items-center font-extrabold uppercase tracking-[-0.045em] text-display"
+            className="hero-title relative top-6 z-0 flex w-full max-w-full flex-col items-center font-extrabold uppercase tracking-[-0.045em] text-display md:top-0"
           >
             {nameLines.map((line) => (
               <span key={line} className="flex whitespace-nowrap">
@@ -234,8 +234,8 @@ export function Hero() {
           </h1>
         </div>
 
-        <div ref={contentRef} className="mt-[clamp(3rem,6vw,5rem)] flex max-w-xl flex-col items-center gap-6">
-          <div className="flex w-full flex-col justify-center gap-3 min-[360px]:flex-row">
+        <div ref={contentRef} className="mt-[clamp(4rem,9vw,5.5rem)] flex max-w-xl translate-y-4 flex-col items-center gap-6 md:mt-[clamp(3rem,6vw,5rem)] md:translate-y-0">
+          <div className="flex w-full translate-y-[0.9rem] flex-col items-center justify-center gap-3 md:flex-row md:translate-y-0">
             <SmoothLink
               href="#projects"
               aria-label="View projects"
@@ -255,7 +255,7 @@ export function Hero() {
               <IconStack icon={DownloadIcon} className="border border-fg/60 text-fg" />
             </a>
           </div>
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex translate-y-4 items-center justify-center gap-3 md:translate-y-0">
             <a
               href={site.github}
               target="_blank"
@@ -289,7 +289,7 @@ export function Hero() {
 
       <SmoothLink
         href="#about"
-        className="hero-scroll-cue absolute bottom-[2vh] left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted transition-colors hover:text-fg"
+        className="hero-scroll-cue absolute bottom-[calc(2vh-0.2rem)] left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted transition-colors hover:text-fg md:bottom-[2vh]"
         aria-label="Scroll to About"
       >
         <span>Scroll to explore</span>
