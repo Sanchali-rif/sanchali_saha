@@ -863,3 +863,14 @@ html.lenis {
 .lenis.lenis-stopped {
   overflow: hidden;
 }
+
+.pill-nav.nav-glass {
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+}
+
+@supports not (backdrop-filter: blur(1px)) {
+  .navbar-header--scrolled .nav-glass {
+    background: rgba(26, 26, 26, 0.92);
+  }
+}

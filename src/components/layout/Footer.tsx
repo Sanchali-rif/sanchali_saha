@@ -60,11 +60,10 @@ export function Footer() {
 
           <motion.button
             type="button"
-            className="flex items-center gap-2 self-start uppercase tracking-[0.14em] transition-colors hover:text-black sm:self-auto"
+            className="flex cursor-pointer items-center gap-2 self-start uppercase tracking-[0.14em] transition-colors hover:text-black sm:self-auto"
             onClick={() => scrollTo(0)}
             whileHover={{ y: -3 }}
             whileTap={{ scale: 0.96 }}
-            cursor-pointer
           >
             Back to top <span aria-hidden="true">&#8593;</span>
           </motion.button>

@@ -66,7 +66,7 @@ export function Nav() {
           intro
           highlightColor="var(--accent)"
           ariaLabel="Primary"
-          className="navbar-plain"
+          className="navbar-plain nav-glass"
         />
         <span className="hidden size-11 shrink-0 md:block" aria-hidden="true" />
       </div>

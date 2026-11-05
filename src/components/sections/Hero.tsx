@@ -44,6 +44,9 @@ export function Hero() {
     () => {
       const media = gsap.matchMedia()
       let active = true
+      const refreshScrollTriggers = () => {
+        if (active) ScrollTrigger.refresh()
+      }
       const letters = letterRefs.current.filter(
         (letter): letter is HTMLSpanElement => letter !== null,
       )
@@ -126,14 +129,16 @@ export function Hero() {
 
       })
 
-      document.fonts.ready.then(() => {
-        if (active) {
-          ScrollTrigger.refresh()
-        }
-      })
+      if (document.readyState === 'complete') {
+        refreshScrollTriggers()
+      } else {
+        window.addEventListener('load', refreshScrollTriggers, { once: true })
+      }
+      document.fonts.ready.then(refreshScrollTriggers)
 
       return () => {
         active = false
+        window.removeEventListener('load', refreshScrollTriggers)
         media.revert()
       }
     },
