@@ -37,6 +37,28 @@ export const projects: Project[] = [
     image: '/NeatNode.png',
     imageAlt: 'NeatNode data-cleaning application screenshot',
   },
+  {
+    slug: 'healthsync',
+    title: 'HealthSync',
+    description:
+      'HealthSync is an AI-powered hospital emergency response platform that streamlines patient triage, hospital resource management, and ambulance coordination. It leverages real-time tracking, intelligent routing, and predictive analytics to improve emergency response efficiency and enable faster, more coordinated healthcare delivery.',
+    tags: ['React.js', 'Tailwind CSS', 'Node.js', 'Express.js', 'MongoDB Atlas', 'Google Vertex AI', 'Socket.io', 'Google Maps API'],
+    live: 'https://healthsync-red.vercel.app/',
+    repo: 'https://github.com/Sanchali-rif/HealthSync',
+    image: '/healthsync.jpeg',
+    imageAlt: 'HealthSync emergency response platform',
+  },
+  {
+    slug: 'civiclens',
+    title: 'CivicLens',
+    description:
+      'CivicLens is an AI-powered civic issue reporting and monitoring platform that connects citizens with local authorities. It uses AI-based image analysis, risk classification, and community verification to identify, prioritize, and track real-world civic problems. With intelligent issue prioritization and an authority dashboard, CivicLens aims to make cities safer, more responsive, and accountable.',
+    tags: ['React.js', 'Tailwind CSS', 'PHP', 'PostgreSQL', 'Gemini API', 'Google Maps API', 'Geolocation API', 'Google Vertex AI API'],
+    live: 'https://civic-lens-zeta.vercel.app/',
+    repo: 'https://github.com/Sanchali-rif/CivicLens',
+    image: '/CivicLens.jpeg',
+    imageAlt: 'CivicLens civic issue reporting and monitoring platform',
+  },
 ]
 
 export type { Project }
