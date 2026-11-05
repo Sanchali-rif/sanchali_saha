@@ -189,15 +189,6 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="absolute z-10 right-6 top-1/2 hidden -translate-y-1/2 items-center gap-3 text-xs font-medium tracking-[0.14em] lg:flex lg:right-16">
-          <div className="flex flex-col gap-5 text-muted/45">
-            <span className="hero-index-active text-fg">01</span>
-            <span>02</span>
-            <span>03</span>
-            <span>04</span>
-          </div>
-          <span className="hero-index-line h-px w-8 bg-fg" />
-        </div>
       </div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center text-center">
@@ -292,14 +283,6 @@ export function Hero() {
         </div>
       </div>
 
-      <SmoothLink
-        href="#about"
-        className="hero-scroll-cue absolute bottom-[calc(2vh-0.2rem)] left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-muted transition-colors hover:text-fg md:bottom-[2vh]"
-        aria-label="Scroll to About"
-      >
-        <span>Scroll to explore</span>
-        <span aria-hidden="true" className="text-lg leading-none">&#8595;</span>
-      </SmoothLink>
     </section>
   )
 }

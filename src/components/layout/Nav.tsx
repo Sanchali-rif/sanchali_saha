@@ -7,7 +7,7 @@ import { SmoothLink } from '../ui/SmoothLink'
 import PillNav from '../ui/PillNav.jsx'
 import MetallicPaint from '../ui/MetallicPaint'
 
-const sectionIds = [...navItems.map((item) => item.href.slice(1)), 'github']
+const sectionIds = ['top', ...navItems.map((item) => item.href.slice(1)), 'github']
 
 export function Nav() {
   useTheme()

@@ -435,6 +435,13 @@ body {
   margin-top: 1rem;
 }
 
+.about-card__availability-cta {
+  width: 100%;
+  min-width: 0;
+  justify-content: space-between;
+  padding-left: 1.25rem;
+}
+
 .about-card--focus::after {
   position: absolute;
   top: 0;

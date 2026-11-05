@@ -230,10 +230,8 @@ export function AboutSection() {
           </div>
           <a
             href={site.resume}
-            download="Sanchali-Saha-CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cta cta--primary"
+            download="SanchaliSaha_CV.pdf"
+            className="cta cta--primary about-card__availability-cta"
           >
             <span className="cta__label">Download CV</span>
             <span className="cta__icon bg-accent-on text-accent"><FaDownload aria-hidden="true" /></span>

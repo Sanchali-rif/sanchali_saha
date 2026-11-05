@@ -17,11 +17,15 @@ export function useActiveSection(sectionIds: readonly string[] = []) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        const visibleSection = entries.find((entry) => entry.isIntersecting)
+        if (!entries.some((entry) => entry.isIntersecting)) return
 
-        if (visibleSection) {
-          setActiveSection(visibleSection.target.id)
-        }
+        const activationLine = window.innerHeight * 0.5
+        const currentSection = sections.find((section) => {
+          const bounds = section.getBoundingClientRect()
+          return bounds.top <= activationLine && bounds.bottom > activationLine
+        })
+
+        setActiveSection(currentSection?.id ?? null)
       },
       { rootMargin: '-45% 0px -50% 0px' },
     )
