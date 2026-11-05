@@ -244,10 +244,11 @@
   color: var(--muted);
   font-size: 0.8rem;
   letter-spacing: 0;
+  isolation: isolate;
 }
 
 .navbar-plain .pill-nav__item::before {
-  background: var(--accent);
+  background: var(--pill-highlight, var(--accent));
   transform: scale(0.9);
 }
 
@@ -258,7 +259,15 @@
 
 .navbar-plain .pill-nav__item:hover,
 .navbar-plain .pill-nav__item[aria-current='page'] {
-  color: var(--accent-on);
+  color: var(--pill-highlight-text, var(--accent-on));
+}
+
+[data-theme='light'] .navbar-plain {
+  --pill-highlight-text: #f5f1ea;
+}
+
+[data-theme='light'] .navbar-plain .pill-nav__item::before {
+  background: #111111;
 }
 
 .navbar-plain .pill-nav__item[aria-current='page']::after {

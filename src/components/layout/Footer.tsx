@@ -8,7 +8,7 @@ export function Footer() {
   const scrollTo = useScrollTo()
 
   return (
-    <footer className="rounded-t-[3rem] bg-accent text-accent-on">
+    <footer id="contact" className="rounded-t-[3rem] bg-accent text-accent-on">
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-10 sm:py-24 lg:px-12 lg:py-28">
         <div className="max-w-4xl">
           <p className="mb-5 text-xs font-medium uppercase tracking-[0.18em] opacity-70">

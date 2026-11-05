@@ -31,6 +31,7 @@ export function SmoothScroll({ children }: PropsWithChildren) {
 
   const scrollTo = (target: ScrollTarget) => {
     const lenis = lenisRef.current
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
 
     if (target === '#projects') {
       const section = document.querySelector<HTMLElement>(target)
@@ -44,7 +45,7 @@ export function SmoothScroll({ children }: PropsWithChildren) {
         return
       }
 
-      window.scrollTo({ top, behavior: 'auto' })
+      window.scrollTo({ top, behavior })
       return
     }
 
@@ -60,7 +61,7 @@ export function SmoothScroll({ children }: PropsWithChildren) {
           ? document.querySelector<HTMLElement>(target)?.offsetTop ?? 0
           : target.offsetTop
 
-    window.scrollTo({ top, behavior: 'auto' })
+    window.scrollTo({ top, behavior })
   }
 
   return (

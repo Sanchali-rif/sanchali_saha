@@ -24,7 +24,7 @@ export function Nav() {
 
   return (
     <motion.header
-      className={`navbar-header fixed inset-x-0 top-0 z-40 px-4 py-4 md:px-8 ${scrolled ? 'navbar-header--scrolled' : ''}`}
+      className={`navbar-header fixed inset-x-0 top-0 z-50 isolate px-4 py-4 md:px-8 ${scrolled ? 'navbar-header--scrolled' : ''}`}
       animate={{ y: 0 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     >
