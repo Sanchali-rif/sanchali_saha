@@ -7,13 +7,13 @@
 .actions { flex-shrink: 0; }
 .scroller { overflow-x: auto; padding: .5rem 0; scrollbar-color: var(--line) transparent; touch-action: pan-x; }
 .canvas { position: relative; min-width: 42rem; padding-left: 2.5rem; }
-.months { display: grid; grid-template-columns: repeat(var(--weeks), 1fr); height: 1.5rem; margin-left: .3rem; }
+.months { display: grid; grid-template-columns: repeat(var(--weeks), minmax(0, 1fr)); column-gap: .3rem; height: 1.5rem; }
 .month { grid-column: calc(var(--col) + 1); color: var(--muted); font-size: .7rem; white-space: nowrap; }
 .weekdays { position: absolute; top: 1.5rem; left: 0; display: grid; grid-template-rows: repeat(7, 1fr); height: 6.5rem; }
 .weekday { color: var(--muted); font-size: .65rem; line-height: 1; }
 .plot { position: relative; }
 .grid { display: grid; grid-template-rows: repeat(7, 1fr); gap: .3rem; position: relative; }
-.row { display: grid; grid-template-columns: repeat(var(--weeks), 1fr); gap: .3rem; }
+.row { display: grid; grid-template-columns: repeat(var(--weeks), minmax(0, 1fr)); gap: .3rem; }
 .cell { display: block; position: relative; aspect-ratio: 1; min-width: .7rem; border: 1px solid #292929; border-radius: .25rem; background: #292929; transition: background-color .2s ease, transform .2s ease, border-color .2s ease; }
 .cell[data-active="true"] { z-index: 2; outline: 2px solid var(--accent); outline-offset: 2px; }
 .cell:not([data-empty])::before { content: ""; position: absolute; inset: -8px; }
@@ -48,5 +48,5 @@
 .captionShort { display: none; }
 @keyframes cell-in { from { opacity: 0; transform: translateY(.35rem) scale(.7); } to { opacity: 1; transform: none; } }
 @keyframes cell-in-back { from { opacity: 0; transform: translateY(-.35rem) scale(.7); } to { opacity: 1; transform: none; } }
-@media (max-width: 560px) { .header { align-items: flex-start; flex-direction: column; } .legend { flex-direction: row; gap: .5rem; } .scale { flex: 0 0 auto; gap: .25rem; } .cell { min-width: .55rem; } .tipSecondary { white-space: normal; } }
+@media (max-width: 560px) { .header { align-items: flex-start; flex-direction: column; } .legend { flex-direction: row; gap: .5rem; } .scale { flex: 0 0 auto; gap: .25rem; } .tipSecondary { white-space: normal; } }
 @media (prefers-reduced-motion: reduce) { .cell { transition: none; } .grid[data-reveal="revealing"] .cell { animation: none; } }
