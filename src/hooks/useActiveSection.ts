@@ -15,23 +15,25 @@ export function useActiveSection(sectionIds: readonly string[] = []) {
       return
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return
+    const updateActiveSection = () => {
+      const activationLine = window.innerHeight * 0.5
+      const currentSection = sections.find((section) => {
+        const bounds = section.getBoundingClientRect()
+        return bounds.top <= activationLine && bounds.bottom > activationLine
+      })
 
-        const activationLine = window.innerHeight * 0.5
-        const currentSection = sections.find((section) => {
-          const bounds = section.getBoundingClientRect()
-          return bounds.top <= activationLine && bounds.bottom > activationLine
-        })
+      // Keep the hero selected when the activation line falls in a gap near the
+      // top of the page (for example, while returning from another section).
+      setActiveSection(currentSection?.id ?? (window.scrollY <= 1 ? sections[0].id : null))
+    }
 
-        setActiveSection(currentSection?.id ?? null)
-      },
-      { rootMargin: '-45% 0px -50% 0px' },
-    )
-
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
+    updateActiveSection()
+    window.addEventListener('scroll', updateActiveSection, { passive: true })
+    window.addEventListener('resize', updateActiveSection)
+    return () => {
+      window.removeEventListener('scroll', updateActiveSection)
+      window.removeEventListener('resize', updateActiveSection)
+    }
   }, [sectionKey])
 
   return activeSection

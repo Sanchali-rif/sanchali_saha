@@ -6,7 +6,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "motion/react";
 import styles from "./activity-heatmap-utils/activity-heatmap.module.css";
 
-export interface ActivityDay { date: string; count: number }
+export interface ActivityDay { date: string; count: number; level: number }
 export interface ActivityHeatmapProps {
   days: ActivityDay[]; label: string; period: string;
   unit?: { one: string; other: string }; thresholds?: [number, number, number];
@@ -24,10 +24,8 @@ function makeModel(days: ActivityDay[], weekStartsOn: 0 | 1, thresholds: [number
   const start = valid.length ? Math.min(...valid) : isoTime("2025-01-01");
   const length = valid.length ? Math.round((Math.max(...valid) - start) / DAY) + 1 : 0;
   const counts = new Array<number>(length).fill(0);
-  days.forEach((day) => { const index = Math.round((isoTime(day.date) - start) / DAY); if (index >= 0 && index < length) counts[index] += Math.max(0, day.count); });
-  const max = Math.max(0, ...counts);
-  const bounds = thresholds ?? [Math.max(1, Math.ceil(max * .25)), Math.max(2, Math.ceil(max * .5)), Math.max(3, Math.ceil(max * .75))];
-  const levels = counts.map((count) => count === 0 ? 0 : count <= bounds[0] ? 1 : count <= bounds[1] ? 2 : count <= bounds[2] ? 3 : 4);
+  const levels = new Array<number>(length).fill(0);
+  days.forEach((day) => { const index = Math.round((isoTime(day.date) - start) / DAY); if (index >= 0 && index < length) { counts[index] += Math.max(0, day.count); levels[index] = day.level; } });
   const lead = (new Date(start).getUTCDay() - weekStartsOn + 7) % 7;
   const weeks = Math.ceil((lead + length) / 7);
   const formatter = new Intl.DateTimeFormat(locale, { month: "short", timeZone: "UTC" });
@@ -35,7 +33,7 @@ function makeModel(days: ActivityDay[], weekStartsOn: 0 | 1, thresholds: [number
   for (let i = 0; i < length; i++) { const date = new Date(start + i * DAY); if (i === 0 || date.getUTCDate() === 1) months.push({ col: Math.floor((lead + i) / 7), label: formatter.format(date) }); }
   if (months.length > 1 && months[1].col - months[0].col < 3) months.shift();
   const perLevel = [0, 0, 0, 0, 0]; levels.forEach((level) => perLevel[level]++);
-  return { start, length, lead, weeks, total: counts.reduce((a, b) => a + b, 0), counts, levels, thresholds: bounds, months, perLevel };
+  return { start, length, lead, weeks, total: counts.reduce((a, b) => a + b, 0), counts, levels, thresholds: thresholds ?? [1, 3, 6], months, perLevel };
 }
 
 export function ActivityHeatmap({ days, label, period, unit = { one: "contribution", other: "contributions" }, thresholds, weekStartsOn = 0, selectedDate = null, onSelectDate, actions, locale = "en-US", className }: ActivityHeatmapProps) {
