@@ -179,7 +179,7 @@ export function Hero() {
         <div className="hero-crosshair hero-crosshair-right absolute bottom-[140px] right-[80px] hidden lg:block" />
 
         <div className="absolute bottom-[10vh] left-1/2 flex -translate-x-1/2 translate-y-4 flex-col items-center gap-2 text-center md:bottom-[7vh] md:left-6 md:translate-x-0 md:translate-y-0 md:flex-row md:items-center md:gap-4 md:text-left lg:left-10">
-          <span className="hidden h-[calc(8rem+30px)] w-px -translate-y-[15px] bg-line md:block" />
+          <span className="hidden h-20 w-px -translate-y-[15px] bg-line md:block" />
           <div className="text-xs uppercase tracking-[0.18em] text-muted">
             <p>{site.location}</p>
             <p className="mt-3 flex items-center gap-2">

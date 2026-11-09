@@ -135,7 +135,7 @@ export function ProjectsSection() {
           </p>
         </header>
 
-        <article>
+        <article id={`project-${project.slug}`}>
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
             <a
               href={project.live}
@@ -158,6 +158,7 @@ export function ProjectsSection() {
               )}
             </a>
             <div className="lg:col-span-5">
+              <p className="mb-4 text-right text-xs font-medium tabular-nums tracking-[0.14em] text-muted">01</p>
               <h3 className="font-light leading-[0.95] tracking-[-0.04em] text-fg" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)' }}>
                 {project.title}
               </h3>
@@ -208,7 +209,7 @@ export function ProjectsSection() {
         </article>
 
         {secondProject && (
-          <article className="mt-24 border-t border-line pt-8 md:mt-32">
+          <article id={`project-${secondProject.slug}`} className="mt-24 border-t border-line pt-8 md:mt-32">
             <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
               <a
                 href={secondProject.live}
@@ -225,6 +226,7 @@ export function ProjectsSection() {
                 />
               </a>
               <div className="lg:col-span-5">
+                <p className="mb-4 text-right text-xs font-medium tabular-nums tracking-[0.14em] text-muted">02</p>
                 <h3 className="font-light leading-[0.95] tracking-[-0.04em] text-fg" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)' }}>
                   {secondProject.title}
                 </h3>
@@ -260,7 +262,7 @@ export function ProjectsSection() {
         )}
 
         {thirdProject && (
-          <article className="mt-24 border-t border-line pt-8 md:mt-32">
+          <article id={`project-${thirdProject.slug}`} className="mt-24 border-t border-line pt-8 md:mt-32">
             <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
               <a
                 href={thirdProject.live}
@@ -277,6 +279,7 @@ export function ProjectsSection() {
                 />
               </a>
               <div className="lg:col-span-5">
+                <p className="mb-4 text-right text-xs font-medium tabular-nums tracking-[0.14em] text-muted">03</p>
                 <h3 className="font-light leading-[0.95] tracking-[-0.04em] text-fg" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)' }}>
                   {thirdProject.title}
                 </h3>
@@ -312,7 +315,7 @@ export function ProjectsSection() {
         )}
 
         {fourthProject && (
-          <article className="mt-24 border-t border-line pt-8 md:mt-32">
+          <article id={`project-${fourthProject.slug}`} className="mt-24 border-t border-line pt-8 md:mt-32">
             <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
               <a
                 href={fourthProject.live}
@@ -329,6 +332,7 @@ export function ProjectsSection() {
                 />
               </a>
               <div className="lg:col-span-5">
+                <p className="mb-4 text-right text-xs font-medium tabular-nums tracking-[0.14em] text-muted">04</p>
                 <h3 className="font-light leading-[0.95] tracking-[-0.04em] text-fg" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)' }}>
                   {fourthProject.title}
                 </h3>
